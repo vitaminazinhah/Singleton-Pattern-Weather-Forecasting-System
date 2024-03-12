@@ -1,18 +1,3 @@
-# Sistema de Dados Metereologicos 
-
-Funcionalidades implementadas:
-
-1- ~~Coleta de Dados Meteorológicos~~
-2- ~~Geração de Previsões~~
-3- ~~Serviços de Localização do Usuário~~
-4- ~~Sistema de Alerta para Condições Meteorológicas Graves~~
-5- ~~Acesso a Dados Meteorológicos Históricos~~
-6- ~~Widgets~~
-7- ~~Mapas Meteorológicos Interativos~~
-8- ~~Análise e Relatórios Climáticos~~
-9- ~~Feedback e Relatórios dos Usuários~~
-10- Suporte a Múltiplos Idiomas
-
 Bibliotecas utilizadas:
 
 1- pip install requests
