@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 import webbrowser
 import folium
+from PIL import Image, ImageDraw, ImageTk
 from datetime import datetime, timedelta
 from funcoes import LocalizacaoAutomatica, WeatherDataCollector, WeeklyForecastDataFetcher, WeeklyForecast, HistoricalWeatherDataFetcher
 
@@ -26,10 +27,46 @@ class ResultWindow:
         else:
             tk.Label(self.result_window, text="Erro ao obter dados da cidade.", font=('Helvetica', 10)).pack(pady=10)
 
+class WelcomeWindow:
+    def __init__(self, root):
+        self.root = root
+        self.welcome_window = tk.Toplevel(root)
+        self.welcome_window.title("Bem-Vindo")
+        self.welcome_window.geometry("600x600")  # Defina o tamanho da janela de boas-vindas para 400x300
+
+        # Frame para centralizar o conteúdo
+        frame = tk.Frame(self.welcome_window)
+        frame.pack(expand=True)
+
+        # Label de boas-vindas
+        label_welcome = tk.Label(frame, text="Bem-Vindo!", font=('Helvetica', 18, 'bold'))
+        label_welcome.pack(pady=(20, 120))  # Adiciona um pequeno espaçamento na parte inferior
+
+        # Botão redondo
+        btn_skip = tk.Button(frame, text="Continuar", command=self.close_welcome, font=('Helvetica', 10), bg='#FFD700', bd=0, width=10, height=1)
+        btn_skip.configure(borderwidth=4, highlightthickness=0, relief='flat')  # Remove as bordas do botão
+        btn_skip.pack(pady=(50, 10))  # Adiciona um pequeno espaçamento na parte superior
+
+        # Torna o botão redondo
+        btn_skip.place(relx=0.5, rely=0.5, anchor=tk.CENTER)
+
+    def close_welcome(self):
+        self.welcome_window.destroy()
+        self.root.deiconify()  # Restaura a tela principal após fechar a tela de boas-vindas
+
+
+
 
 class WeatherApp:
     def __init__(self, root):
         self.root = root
+        self.root.withdraw()  # Esconde a janela principal enquanto a tela de boas-vindas é exibida
+
+        welcome_screen = WelcomeWindow(root)
+        root.wait_window(welcome_screen.welcome_window)  # Espera até que a tela de boas-vindas seja fechada
+
+        # Restaura a janela principal e exibe a interface principal
+        self.root.deiconify()
         self.root.title("Consulta Meteorológica")
 
         localizacao_obj = LocalizacaoAutomatica()
@@ -51,7 +88,7 @@ class WeatherApp:
         self.create_widgets()
 
     def create_widgets(self):
-        self.root.geometry("400x600")  # Ajustei a altura para acomodar o botão de feedback
+        self.root.geometry("600x650")  # Ajustei a altura para acomodar o botão de feedback
         self.root.configure(bg='#E5E5E5')
         self.root.resizable(False, False)
 

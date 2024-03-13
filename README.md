@@ -4,6 +4,8 @@ Bibliotecas utilizadas:
 2- pip install geocoder
 3- pip install folium
 4- pip install tk
+5- pip install Pillow
+
    Opção de baixar tudo de uma vez: pip install -r requirements.txt
 
 
